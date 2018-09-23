@@ -19,8 +19,8 @@ describe('websockets', () => {
     })
 
     wss.messageHook = (ws, msg) => {
-      assert.equal(msg.event, 'subscribe')
-      wss.send(ws, {ok: true})
+      assert.strictEqual(msg.event, 'subscribe')
+      wss.send(ws, { ok: true })
     }
 
     wss.closeHook = (ws) => {
@@ -41,12 +41,12 @@ describe('websockets', () => {
     })
 
     ws.on('close', () => {
-      assert.equal(ws.connected, false)
+      assert.strictEqual(ws.connected, false)
       done()
     })
 
     ws.on('message', (msg) => {
-      assert.deepEqual(msg, { ok: true })
+      assert.deepStrictEqual(msg, { ok: true })
       ws.close()
     })
 
