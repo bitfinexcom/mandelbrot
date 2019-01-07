@@ -119,6 +119,24 @@ describe('wallet helper', () => {
     ], w.getState())
   })
 
+  it('supports decimals transforms, update message with value', () => {
+    const w = new Wallet({ decimals: 8 })
+    const snap = [
+      [ 'exchange', 'USD', 9700000000, 0, 9700000000 ],
+      [ 'exchange', 'ETH', 10000000000, 0, 10000000000 ]
+    ]
+
+    w.update(snap)
+
+    w.update([ 'exchange', 'EOS', 9900000000, 0, 9900000000 ])
+
+    assert.deepStrictEqual([
+      [ 'exchange', 'USD', 97, 0, 97 ],
+      [ 'exchange', 'ETH', 100, 0, 100 ],
+      [ 'exchange', 'EOS', 99, 0, 99 ]
+    ], w.getState())
+  })
+
   it('supports decimals transforms, update entry replace', () => {
     const w = new Wallet({ decimals: 8 })
     const snap = [
