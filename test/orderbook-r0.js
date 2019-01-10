@@ -19,23 +19,6 @@ describe('orderbook helper', () => {
     assert.deepStrictEqual(snap, o.getState())
   })
 
-  it('applies decimal transforms', () => {
-    const o = new Orderbook({ decimals: 4 })
-    const snap = [
-      [ '18446744073709551615', 5000000, 10000 ],
-      [ '1', 5010000, -12000 ],
-      [ '2', 5010000, -12000 ]
-    ]
-
-    o.setSnapshot(snap)
-
-    assert.deepStrictEqual([
-      [ '18446744073709551615', 500, 1 ],
-      [ '1', 501, -1.2 ],
-      [ '2', 501, -1.2 ]
-    ], o.getState())
-  })
-
   it('applies keyed transforms transforms', () => {
     const o = new Orderbook({ keyed: true })
     const snap = [
@@ -220,46 +203,6 @@ describe('orderbook helper', () => {
         amount: 10001,
         id: '18446744073709551614',
         price: 10000
-      }]
-    }
-
-    assert.deepStrictEqual(exp, o.getState())
-  })
-
-  it('added entries have decimals conversion', () => {
-    const o = new Orderbook({ keyed: true, decimals: 4 })
-
-    const snap = [
-      [ '18446744073709551615', 5000000, 10000 ],
-      [ '1', 5010000, -12000 ],
-      [ '2', 5010000, -12000 ]
-    ]
-
-    o.setSnapshot(snap)
-
-    const update = [ '5', 10000, -10000 ] // sell- ask
-    o.applyUpdate(update)
-
-    const exp = {
-      asks: [{
-        amount: -1.2,
-        id: '1',
-        price: 501
-      },
-      {
-        amount: -1.2,
-        id: '2',
-        price: 501
-      },
-      {
-        amount: -1,
-        id: '5',
-        price: 1
-      }],
-      bids: [{
-        amount: 1,
-        id: '18446744073709551615',
-        price: 500
       }]
     }
 
