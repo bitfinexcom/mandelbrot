@@ -15,7 +15,7 @@ describe('websockets', () => {
     // 4. close connection
 
     const wss = new Wock({
-      port: 8888
+      port: 9999
     })
 
     wss.messageHook = (ws, msg) => {
@@ -27,7 +27,7 @@ describe('websockets', () => {
       wss.close()
     }
 
-    const conf = { url: 'ws://localhost:8888' }
+    const conf = { url: 'ws://localhost:9999' }
     const ws = new MWsHive(conf)
 
     ws.on('open', () => {
