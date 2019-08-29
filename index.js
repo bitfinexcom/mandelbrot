@@ -1,6 +1,7 @@
 'use strict'
 
 exports.WsBase = require('./lib/mandelbrot-ws-base.js')
+exports.WsBConnect = require('./lib/ws-connect.js')
 
 exports.BaseWallet = require('./lib/base-wallet.js')
 exports.BaseOrderbook = require('./lib/base-ob.js')
