@@ -68,34 +68,16 @@ describe('wallet helper', () => {
     ], w.getState())
   })
 
-  it('provides convinience methods that accepts snaps and updates', () => {
-    const w = new Wallet()
-    const snap = [
-      [ 'exchange', 'USD', 98.999, 0, 98.999 ],
-      [ 'exchange', 'ETH', 100, 0, 100 ]
-    ]
-
-    w.update(snap)
-
-    w.update([ 'exchange', 'EOS', 99, 0, null ])
-
-    assert.deepStrictEqual([
-      [ 'exchange', 'USD', 98.999, 0, 98.999 ],
-      [ 'exchange', 'ETH', 100, 0, 100 ],
-      [ 'exchange', 'EOS', 99, 0, 99 ]
-    ], w.getState())
-  })
-
   it('parse() calls do not affect internal state', () => {
     const w = new Wallet()
-    const snap = [
+    const snap = ['0', 'ws', [
       [ 'exchange', 'USD', 97, 0, 97 ],
       [ 'exchange', 'ETH', 100, 0, 100 ]
-    ]
+    ]]
 
     w.update(snap)
-    const u = [ 'exchange', 'ETH', 70, 0, null ]
 
+    const u = ['0', 'wu', [ 'exchange', 'ETH', 70, 0, null ]]
     w.parse(u)
 
     assert.deepStrictEqual([

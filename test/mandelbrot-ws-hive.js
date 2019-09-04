@@ -3,7 +3,7 @@
 'use strict'
 const assert = require('assert')
 
-const MWsHive = require('../').WsBase
+const Ws = require('../lib/ws-connect')
 const Wock = require('./ws-testhelper.js')
 
 describe('websockets', () => {
@@ -28,7 +28,7 @@ describe('websockets', () => {
     }
 
     const conf = { url: 'ws://localhost:9999' }
-    const ws = new MWsHive(conf)
+    const ws = new Ws(conf)
 
     ws.on('open', () => {
       const msg = {
